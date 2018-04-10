@@ -147,6 +147,8 @@ define([
           const predMean = result[4];
           const predLower = result[5];
           const predUpper = result[6];
+          // const for reference line
+          const mylimit = layout.props.limit;
 
           // Get equation
           let equation = `y=${coef[1]}x`;
@@ -161,11 +163,13 @@ define([
             const elemNum = [];
             const dim1 = []; // Dimension
             const mea1 = [];
+            const mea2 = []; //Reference line
 
             $.each(dataPages[0].qMatrix, (key, value) => {
               elemNum.push(value[0].qElemNumber);
               dim1.push(value[0].qText);
               mea1.push(value[1].qNum);
+              mea2.push(mylimit);//Reference line
             });
 
             // Extend lines
@@ -176,6 +180,7 @@ define([
               for (let i = 0; i < layout.props.extendDurations; i++) {
                 dim1.push(`+${i + 1}`); // Forecast period is displayed as +1, +2, +3...
                 mea1.push('');
+                mea2.push(mylimit);//Reference line
               }
             }
 
@@ -222,6 +227,21 @@ define([
                 type: 'scatter',
                 mode: 'none',
               },
+              //Reference line
+              {
+                x: dim1,
+                y: mea2,
+                name: layout.props.limitlabel,
+                mode: 'lines',
+                marker: {
+                  color: `rgba(${palette[layout.props.limitcolor]},1)`,
+                  size: (layout.props.datapoints) ? layout.props.pointRadius : 1,
+                },
+                line: {
+                  dash: layout.props.limitstyle,
+                  width: layout.props.limitwidth,
+                 },
+             },
             ];
 
             // Add equation as an annotation

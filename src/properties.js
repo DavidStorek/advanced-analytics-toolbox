@@ -339,13 +339,7 @@ define(['./lib/js/analysis/analysis', 'qlik', 'ng!$q'], (analysis, qlik, $q) => 
           },
           // Section for Reference Line
             referenceLine: {
-                type:'array',
                 label: 'Reference line',
-                ref: 'props.referenceline',
-                itemTitleRef:'fixlimitlabel',
-                allowAdd: true,
-                allowRemove: true,
-                addTranslation: "Add Reference Line",
                 show:(data)=>{
                   return[0,9].indexOf(data.props.analysisTypeId)>=0;
                 },

@@ -148,7 +148,7 @@ define([
           const predLower = result[5];
           const predUpper = result[6];
           // const for reference line
-          const mylimit = layout.props.limit;
+          const mylimit = layout.props.limit
 
           // Get equation
           let equation = `y=${coef[1]}x`;
